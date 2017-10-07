@@ -61,6 +61,9 @@ public:
   ///* State dimension
   int n_x_;
 
+  ///* Measurement state dimension for radar
+  int n_z_;
+
   ///* Augmented state dimension
   int n_aug_;
 
@@ -72,6 +75,12 @@ public:
 
   // measurement noise covariance matrix for lidar
   MatrixXd R_laser_;
+
+  // measurement noise covariance matrix for lidar
+  MatrixXd R_radar_;
+
+  // process covariance matrix
+  MatrixXd Q_;
 
 
   /**
@@ -113,6 +122,8 @@ private:
   const double two_pi_ = 2 * M_PI;
 
   double NormalizeAngle(const double angle);
+
+  double CalculateNis(VectorXd z, VectorXd z_pred, MatrixXd S);
 };
 
 #endif /* UKF_H */
